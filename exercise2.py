@@ -1,4 +1,3 @@
-
 from __future__ import annotations
 from math import isclose
 from exercise1 import Vector
