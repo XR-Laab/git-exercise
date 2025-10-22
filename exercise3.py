@@ -34,9 +34,13 @@ class Rectangle:
     #     ll_py = point.y - self._lower_left.y
     #     return ll_px >= 0 and ll_px <= self._dx \
     #         and ll_py >= 0 and ll_py <= self._dy
-    def contains(self, point: Point2D) -> bool:
-        return self.is_in_interval(point.x, self._lower_left.x, self._dx) and \
-               self.is_in_interval(point.y, self._lower_left.y, self._dy)
+    # def contains(self, point: Point2D) -> bool:
+    #     return self.is_in_interval(point.x, self._lower_left.x, self._dx) and \
+    #            self.is_in_interval(point.y, self._lower_left.y, self._dy)
+    def contains(self, point: Point2D, tolerance: float = 0.0) -> bool:
+        return self.is_in_interval(point.x, self._lower_left.x, self._dx, tolerance) and \
+           self.is_in_interval(point.y, self._lower_left.y, self._dy, tolerance)
+
 
 
     def _is_idx_on_upper_edge(self, i: int) -> bool:
@@ -46,9 +50,12 @@ class Rectangle:
         return i in [1, 3]
 
     # def is_in_interval(...) -> bool: # Task A
-    def is_in_interval(self, value: float, start: float, length: float) -> bool:
-        """Check if a value is within [start, start + length]."""
-        return value >= start and value <= start + length
+    # def is_in_interval(self, value: float, start: float, length: float) -> bool:
+    #     """Check if a value is within [start, start + length]."""
+    #     return value >= start and value <= start + length
+    def is_in_interval(self, value: float, start: float, length: float, tolerance: float = 0.0) -> bool:
+        return value >= start - tolerance and value <= start + length + tolerance
+
 
 
 def test_rectangle_contains_exact() -> None:
